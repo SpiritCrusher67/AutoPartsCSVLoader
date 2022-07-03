@@ -1,4 +1,5 @@
 using AutoPartsCSVLoader.Data;
+using AutoPartsCSVLoader.Data.Configuration;
 using AutoPartsCSVLoader.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,4 +19,9 @@ void RegisterServices(IServiceCollection services, IConfiguration configuration)
     });
 
     services.AddScoped<IPriceItemRepository, PriceItemRepository>();
+
+    var emailsData = new SuppliersEmailData();
+    configuration.Bind("SuppliersEmails", emailsData.Values);
+    services.AddSingleton(emailsData);
+
 }
