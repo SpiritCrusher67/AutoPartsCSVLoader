@@ -16,27 +16,27 @@ namespace AutoPartsCSVLoader.Services
 
         }
 
-        public async Task ConnectAsync()
+        public async Task ConnectAsync(CancellationToken cancellationToken = default)
         {
             var host = _configuration["MailConfiguration:Host"];
             var port = int.Parse(_configuration["MailConfiguration:Port"]);
             var useSSL = bool.Parse(_configuration["MailConfiguration:UseSSL"]);
 
-            await _client.ConnectAsync(host, port, useSSL);
+            await _client.ConnectAsync(host, port, useSSL, cancellationToken);
         }
 
-        public async Task AuthenticateAsync()
+        public async Task AuthenticateAsync(CancellationToken cancellationToken = default)
         {
             var userName = _configuration["MailAuthenticationData:Email"];
             var password = _configuration["MailAuthenticationData:Password"];
             var credentials = new NetworkCredential(userName, password);
 
-            await _client.AuthenticateAsync(credentials);
+            await _client.AuthenticateAsync(credentials, cancellationToken);
         }
-        public async Task<IMailFolder> GetInboxAsync()
+        public async Task<IMailFolder> GetInboxAsync(CancellationToken cancellationToken = default)
         {
             var inbox = _client.Inbox;
-            await inbox.OpenAsync(FolderAccess.ReadOnly);
+            await inbox.OpenAsync(FolderAccess.ReadOnly, cancellationToken);
 
             return inbox;
         }
