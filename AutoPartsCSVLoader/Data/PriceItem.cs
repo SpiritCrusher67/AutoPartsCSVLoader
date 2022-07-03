@@ -26,7 +26,7 @@ namespace AutoPartsCSVLoader.Data
             get => description;
             set => description = value.Length > 512 ? value.Substring(0, 512) : value; 
         }
-        public decimal Cost { get; set; }
+        public decimal Price { get; set; }
         public int Count { get; set; }
     }
 }

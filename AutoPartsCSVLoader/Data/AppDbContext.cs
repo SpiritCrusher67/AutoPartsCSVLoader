@@ -6,7 +6,7 @@ namespace AutoPartsCSVLoader.Data
     {
         public DbSet<PriceItem> PriceItems => Set<PriceItem>();
 
-        public AppDbContext() => Database.EnsureCreated();
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) => Database.EnsureCreated();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -15,7 +15,7 @@ namespace AutoPartsCSVLoader.Data
             modelBuilder.Entity<PriceItem>().Property(f => f.SearchVendor).HasMaxLength(64);
             modelBuilder.Entity<PriceItem>().Property(f => f.SearchNumber).HasMaxLength(64);
             modelBuilder.Entity<PriceItem>().Property(f => f.Description).HasMaxLength(512);
-            modelBuilder.Entity<PriceItem>().Property(f => f.Cost).HasPrecision(18, 2);
+            modelBuilder.Entity<PriceItem>().Property(f => f.Price).HasPrecision(18, 2);
 
             base.OnModelCreating(modelBuilder);
         }
