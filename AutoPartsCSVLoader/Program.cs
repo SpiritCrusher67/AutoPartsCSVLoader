@@ -24,7 +24,8 @@ void RegisterServices(IServiceCollection services, IConfiguration configuration)
     configuration.Bind("SuppliersEmails", emailsData.Values);
     services.AddSingleton(emailsData);
 
-    services.AddTransient<MailService>();
+    services.AddTransient<IMailInboxService, MailInboxService>();
     services.AddTransient<IPriceItemDataDbLoader, PriceItemDataDbLoader>();
+    services.AddSingleton<IInboxMessagesService, InboxMessagesService>();
     services.AddHostedService<InboxCheckingService>();
 }

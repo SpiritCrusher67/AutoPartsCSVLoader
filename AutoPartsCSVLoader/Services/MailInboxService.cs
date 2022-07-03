@@ -1,15 +1,16 @@
-﻿using MailKit;
+﻿using AutoPartsCSVLoader.Interfaces;
+using MailKit;
 using MailKit.Net.Imap;
 using System.Net;
 
 namespace AutoPartsCSVLoader.Services
 {
-    public class MailService
+    public class MailInboxService : IMailInboxService
     {
         private readonly ImapClient _client;
         private readonly IConfiguration _configuration;
 
-        public MailService(IConfiguration configuration)
+        public MailInboxService(IConfiguration configuration)
         {
             _configuration = configuration;
             _client = new();
