@@ -1,4 +1,5 @@
 using AutoPartsCSVLoader.Data;
+using AutoPartsCSVLoader.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,4 +17,5 @@ void RegisterServices(IServiceCollection services, IConfiguration configuration)
         options.UseSqlServer(connectionString);
     });
 
+    services.AddScoped<IPriceItemRepository, PriceItemRepository>();
 }
