@@ -45,6 +45,8 @@ namespace AutoPartsCSVLoader.Services
         {
             var message = await GetMessageById(inbox, LastCheckedMessageId++, cancellationToken);
             var (supplierName, stream) = await GetMessageDataOrDefault(message, cancellationToken);
+            if (stream == null || string.IsNullOrEmpty(supplierName)) return;
+
             await LoadDataFromMessage(supplierName, stream, cancellationToken);
         }
 
